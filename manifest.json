@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "CL",
+  "description": "chrome command line",
+  "version": "0.0.0.0",
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "CL",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": [],
+      "js": ["content.js"]
+    }
+  ]
+}
