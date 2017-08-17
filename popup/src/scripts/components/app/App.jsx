@@ -15,6 +15,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.test = this.test.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +30,6 @@ class App extends Component {
     });
     var button = document.getElementById("button");
     button.addEventListener('click', () => {
-      console.log('button subtract');
       this.props.dispatch({
         type: 'SUBTRACT_COUNT'
       });
@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   handleChange(event) {
-    console.log(this.state.input);
     this.props.dispatch({
       type: 'SUBTRACT_COUNT'
     });
@@ -63,9 +62,16 @@ class App extends Component {
   handleSubmit(event) {
     this.props.dispatch({
       type: 'SAVE_COMMAND',
-      payload: "command from popup"
-    })
+      payload: "popup"
+    });
     event.preventDefault();
+  }
+
+  test() {
+    this.props.dispatch({
+      type: 'SAVE_COMMAND',
+      payload: this.state.input
+    });
   }
 
   render() {
@@ -88,8 +94,8 @@ class App extends Component {
             <input type="text" value={this.state.input} onChange={this.handleChange} />
           </label>
           <p>{this.state.input}</p>
-          <input type="submit" value="Submit" />
         </form>
+        <button onClick={this.test}>submit</button>
       </div>
     );
   }
