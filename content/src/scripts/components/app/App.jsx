@@ -15,13 +15,12 @@ class App extends Component {
     document.addEventListener('click', () => {
       this.props.dispatch({
         type: 'ADD_COUNT',
-        payload: 5
+        payload: 1
       });
     });
   }
 
   clearCommands() {
-    console.log(this.commands);
     this.props.dispatch({
       type: 'CLEAR_COMMANDS'
     });

@@ -74,9 +74,15 @@ class App extends Component {
     });
   }
 
+  test2() {
+    this.props.dispatch({
+      type: 'EXEC_COMMAND'
+    });
+  }
+
   render() {
     let p = null;
-
+    const commands = this.props.commands;  // has all the commands when i click submit
     return (
       <div>
         <Title />
@@ -93,6 +99,7 @@ class App extends Component {
             Input:
             <input type="text" value={this.state.input} onChange={this.handleChange} />
           </label>
+          <p>Commands: {commands}</p>
           <p>{this.state.input}</p>
         </form>
         <button onClick={this.test}>submit</button>
@@ -103,7 +110,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count
+    count: state.count,
+    commands: state.commands
   };
 };
 
