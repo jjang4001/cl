@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.clearCommands = this.clearCommands.bind(this);
     this.addCommand = this.addCommand.bind(this);
-    this.test = this.test.bind(this);
+    this.execCommand = this.execCommand.bind(this);
   }
 
   componentDidMount() {
@@ -35,8 +35,10 @@ class App extends Component {
     });
   }
 
-  test() {
-    var payload = "not exec";
+  execCommand() {
+    var payload = document.getElementById("input").value;
+    console.log("here");
+    console.log(payload);
     this.props.dispatch({
       type: 'EXEC_COMMAND',
       payload: payload
@@ -45,6 +47,7 @@ class App extends Component {
 
   render() {
     const commands = this.props.commands;
+    console.log("here 2");
     console.log(commands);
     return (
       <div>
@@ -52,9 +55,12 @@ class App extends Component {
         <p>Click Count: {this.props.count}</p>
         <p>Commands: {commands && commands.allCommands ? commands.allCommands : "boo"}</p>
         <input type="text" id="input"/>
-        <button onClick={this.addCommand}>Submit</button>
+        <button onClick={this.addCommand}>save</button>
         <button onClick={this.clearCommands}>clear</button>
-        <button onClick={this.test}>test</button>
+        <button onClick={this.execCommand}>exec</button>
+        <div id="tabs">
+          <p> Tabs: {commands && commands.currCommand ? commands.currCommand : "nothing yet"}</p>
+        </div>
       </div>
     );
   }

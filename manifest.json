@@ -3,6 +3,9 @@
   "name": "CL",
   "description": "chrome command line",
   "version": "0.0.0.0",
+  "permissions": [
+    "tabs"
+  ],
   "background": {
     "scripts": [
       "event.js"

@@ -1,4 +1,5 @@
 import { compiler } from '../compile/compile';
+
 const initialState = {
   allCommands: [],
   currCommand: null
@@ -14,8 +15,7 @@ export default (state = initialState, action) => {
       state.currCommand = c.getOutput();
       return state;
     case 'CLEAR_COMMANDS':
-      state.allCommands = [];
-      return state;
+      return initialState;
     default:
       return state;
   }

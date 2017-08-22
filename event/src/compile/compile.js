@@ -1,3 +1,5 @@
+import { TabsService } from '../services/tabs-service';
+
 export class compiler {
   constructor(command) {
     this.command = command;
@@ -11,6 +13,11 @@ export class compiler {
   }
   execCommand(command) {
     switch(command) {
+      case "a":
+        return "first command";
+      case "ls":
+        var _tabsService = new TabsService();
+        return _tabsService.getAllTabs();
       case "exec":
         return "exec";
       default:

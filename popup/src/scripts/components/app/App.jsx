@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Title from '../Title';
 
 class App extends Component {
   constructor(props) {
@@ -82,7 +83,7 @@ class App extends Component {
 
   render() {
     let p = null;
-    const commands = this.props.commands;  // has all the commands when i click submit
+    const commands = this.props.commands;
     return (
       <div>
         <Title />
@@ -116,11 +117,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(App);
-
-// using functional components
-
-function Title(props) {
-  return (
-    <h1>Popup</h1>
-  );
-}
