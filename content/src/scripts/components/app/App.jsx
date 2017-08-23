@@ -3,6 +3,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import Output from '../Output';
+
 class App extends Component {
 
   constructor(props) {
@@ -36,9 +38,8 @@ class App extends Component {
   }
 
   execCommand() {
+    this.addCommand();
     var payload = document.getElementById("input").value;
-    console.log("here");
-    console.log(payload);
     this.props.dispatch({
       type: 'EXEC_COMMAND',
       payload: payload
@@ -47,8 +48,6 @@ class App extends Component {
 
   render() {
     const commands = this.props.commands;
-    console.log("here 2");
-    console.log(commands);
     return (
       <div>
         <h1 id="header">Content</h1>
@@ -58,9 +57,7 @@ class App extends Component {
         <button onClick={this.addCommand}>save</button>
         <button onClick={this.clearCommands}>clear</button>
         <button onClick={this.execCommand}>exec</button>
-        <div id="tabs">
-          <p> Tabs: {commands && commands.currCommand ? commands.currCommand : "nothing yet"}</p>
-        </div>
+        <Output commandOutput={commands && commands.output ? commands.output : "Type help for a list of commands"}/>
       </div>
     );
   }

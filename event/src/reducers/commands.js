@@ -2,7 +2,7 @@ import { compiler } from '../compile/compile';
 
 const initialState = {
   allCommands: [],
-  currCommand: null
+  output: null
 };
 
 export default (state = initialState, action) => {
@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
       return state;
     case 'EXEC_COMMAND':
       var c = new compiler(action.payload);
-      state.currCommand = c.getOutput();
+      state.output = c.getOutput();
       return state;
     case 'CLEAR_COMMANDS':
       return initialState;
