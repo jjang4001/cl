@@ -7,10 +7,13 @@ class Output extends Component {
 
   render() {
   	const output = this.props.commandOutput;
-  	console.log(output);
     return (
       <div id="output">
-      	<p>{output}</p>
+      	<ul>
+          {output.map(function(tab) {
+          	return <li>{tab.title}</li>;
+          })}
+      	</ul>
       </div>
     );
   }

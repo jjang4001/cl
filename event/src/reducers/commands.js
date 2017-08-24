@@ -1,8 +1,10 @@
 import { compiler } from '../compile/compile';
+import { OutputParser } from '../../../common/parser';
 
 const initialState = {
   allCommands: [],
-  output: null
+  output: null,
+  commandType: null
 };
 
 export default (state = initialState, action) => {
@@ -15,7 +17,9 @@ export default (state = initialState, action) => {
       state.output = c.getOutput();
       return state;
     case 'CLEAR_COMMANDS':
-      return initialState;
+      state.allCommands = [];
+      state.output = null;
+      return state;
     default:
       return state;
   }
