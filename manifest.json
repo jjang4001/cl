@@ -4,8 +4,12 @@
   "description": "chrome command line",
   "version": "0.0.0.0",
   "permissions": [
-    "tabs"
+    "tabs", "<all_urls>"
   ],
+  "content_security_policy": "script-src 'self' 'unsafe-inline'; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "popup.html"
+  },
   "background": {
     "scripts": [
       "event.js"

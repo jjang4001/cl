@@ -4,7 +4,7 @@ export class TabsService {
   getAllTabs() {
     var ret = [];
   	chrome.tabs.query({
-      // no properties set - gets tabs from all windows
+      // no properties set
     }, function(tabs) {
       for (var i=0; i<tabs.length; i++) {
         ret.push(tabs[i]);

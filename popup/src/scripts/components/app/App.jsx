@@ -1,109 +1,68 @@
-// popup page
+// Popup page
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Title from '../Title';
+
+import Output from '../Output';
 
 class App extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {
-      date: new Date(),
-      isToggleOn: true,
-      input: ''
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.test = this.test.bind(this);
+    this.clearCommands = this.clearCommands.bind(this);
+    this.addCommand = this.addCommand.bind(this);
+    this.execCommand = this.execCommand.bind(this);
   }
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
     document.addEventListener('click', () => {
       this.props.dispatch({
-        type: 'ADD_COUNT'
-      });
-    });
-    var button = document.getElementById("button");
-    button.addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'SUBTRACT_COUNT'
+        type: 'ADD_COUNT',
+        payload: 1
       });
     });
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
-
-  handleChange(event) {
+  clearCommands() {
     this.props.dispatch({
-      type: 'SUBTRACT_COUNT'
+      type: 'CLEAR_COMMANDS'
     });
-    this.setState({input: event.target.value});
   }
 
-  handleSubmit(event) {
+  addCommand() {
+    var input = document.getElementById("input").value;
     this.props.dispatch({
       type: 'SAVE_COMMAND',
-      payload: "popup"
-    });
-    event.preventDefault();
-  }
-
-  test() {
-    this.props.dispatch({
-      type: 'SAVE_COMMAND',
-      payload: this.state.input
+      payload: input
     });
   }
 
-  test2() {
+  execCommand() {
+    this.addCommand();
+    var payload = document.getElementById("input").value;
     this.props.dispatch({
-      type: 'EXEC_COMMAND'
+      type: 'EXEC_COMMAND',
+      payload: payload
+    });
+    this.props.dispatch({
+      type: 'ADD_COUNT',
+      payload: 1
     });
   }
 
   render() {
-    let p = null;
     const commands = this.props.commands;
+    // for some reason, save and clear buttons work as expected, but exec needs another action to be executed before updating page
     return (
       <div>
-        <Title />
-        <p>
-          {this.state.isToggleOn ? (
-            <p>Click Count: {this.props.count}</p>
-          ) : (
-            <p>It is {this.state.date.toLocaleTimeString()}</p>
-          )}
-        </p>
-        <button id="button" onClick={this.handleClick}>{this.state.isToggleOn ? 'ON' : 'OFF'}</button>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Input:
-            <input type="text" value={this.state.input} onChange={this.handleChange} />
-          </label>
-          <p>Commands: {commands}</p>
-          <p>{this.state.input}</p>
-        </form>
-        <button onClick={this.test}>submit</button>
+        <h1 id="header">Popup/New Tab</h1>
+        <p>Click Count: {this.props.count}</p>
+        <p>Commands: {commands && commands.allCommands ? commands.allCommands : "boo"}</p>
+        <input type="text" id="input"/>
+        <button onClick={this.addCommand}>save</button>
+        <button onClick={this.clearCommands}>clear</button>
+        <button onClick={this.execCommand}>exec</button>
+        <Output commandOutput={commands && commands.output ? commands.output : ["Type help for a list of commands"]}/>
       </div>
     );
   }

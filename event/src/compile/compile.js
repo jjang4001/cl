@@ -18,8 +18,6 @@ export class compiler {
       case "ls":
         var _tabsService = new TabsService();
         return _tabsService.getAllTabs();
-      case "exec":
-        return "exec";
       default:
         return "output";
     }

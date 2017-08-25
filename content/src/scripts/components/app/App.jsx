@@ -12,7 +12,6 @@ class App extends Component {
     this.clearCommands = this.clearCommands.bind(this);
     this.addCommand = this.addCommand.bind(this);
     this.execCommand = this.execCommand.bind(this);
-    this.test = this.test.bind(this);
   }
 
   componentDidMount() {
@@ -22,7 +21,6 @@ class App extends Component {
         payload: 1
       });
     });
-    console.log("mount");
   }
 
   clearCommands() {
@@ -40,7 +38,6 @@ class App extends Component {
   }
 
   execCommand() {
-    console.log(this.props);
     this.addCommand();
     var payload = document.getElementById("input").value;
     this.props.dispatch({
@@ -51,11 +48,6 @@ class App extends Component {
       type: 'ADD_COUNT',
       payload: 1
     });
-  }
-
-  test() {
-    console.log("test");
-    this.props.clearCommands()
   }
 
   render() {
@@ -70,7 +62,6 @@ class App extends Component {
         <button onClick={this.clearCommands}>clear</button>
         <button onClick={this.execCommand}>exec</button>
         <Output commandOutput={commands && commands.output ? commands.output : ["Type help for a list of commands"]}/>
-        <button onClick={this.test}>test</button>
       </div>
     );
   }
