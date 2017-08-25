@@ -3,6 +3,7 @@ import { TabsService } from '../services/tabs-service';
 export class compiler {
   constructor(command) {
     this.command = command;
+    this._tabsService = new TabsService();
     this.output = this.execCommand(command);
   }
   getCommand() {
@@ -14,12 +15,11 @@ export class compiler {
   execCommand(command) {
     switch(command) {
       case "a":
-        return "first command";
+        return [{title: "first command", test: "test"}, {title: "test", test: "test2"}];
       case "ls":
-        var _tabsService = new TabsService();
-        return _tabsService.getAllTabs();
+        return this._tabsService.getAllTabs();
       default:
-        return "output";
+        return [{title: "could not recognize the command"}];
     }
   }
 }

@@ -16,6 +16,7 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener('click', () => {
+      console.log(this.props.commands);
       this.props.dispatch({
         type: 'ADD_COUNT',
         payload: 1
@@ -30,23 +31,22 @@ class App extends Component {
   }
 
   addCommand() {
-    var input = document.getElementById("input").value;
+    var payload = document.getElementById("input").value;
     this.props.dispatch({
       type: 'SAVE_COMMAND',
-      payload: input
+      payload: payload
     });
   }
 
   execCommand() {
-    this.addCommand();
     var payload = document.getElementById("input").value;
     this.props.dispatch({
-      type: 'EXEC_COMMAND',
+      type: 'SAVE_COMMAND',
       payload: payload
     });
     this.props.dispatch({
-      type: 'ADD_COUNT',
-      payload: 1
+      type: 'EXEC_COMMAND',
+      payload: payload
     });
   }
 
@@ -62,7 +62,7 @@ class App extends Component {
         <button onClick={this.addCommand}>save</button>
         <button onClick={this.clearCommands}>clear</button>
         <button onClick={this.execCommand}>exec</button>
-        <Output commandOutput={commands && commands.output ? commands.output : ["Type help for a list of commands"]}/>
+        <Output commandOutput={commands && commands.output ? commands.output : [{title: "Type help for a list of commands"}]}/>
       </div>
     );
   }

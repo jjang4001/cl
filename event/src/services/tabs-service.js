@@ -2,11 +2,12 @@ export class TabsService {
   constructor() {}
 
   getAllTabs() {
-    var ret = [];
+    var ret = [{title: "click anywhere"}];
   	chrome.tabs.query({
       // no properties set
     }, function(tabs) {
-      for (var i=0; i<tabs.length; i++) {
+      ret[0] = tabs[0];
+      for (var i=1; i<tabs.length; i++) {
         ret.push(tabs[i]);
       }
     });
