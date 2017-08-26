@@ -14,8 +14,6 @@ export class compiler {
   }
   execCommand(command) {
     switch(command) {
-      case "a":
-        return [{title: "first command", test: "test"}, {title: "test", test: "test2"}];
       case "ls":
         return this._tabsService.getAllTabs();
       case "init":

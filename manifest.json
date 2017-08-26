@@ -4,7 +4,7 @@
   "description": "chrome command line",
   "version": "0.0.0.0",
   "permissions": [
-    "tabs", "<all_urls>"
+    "tabs", "<all_urls>", "webNavigation"
   ],
   "chrome_url_overrides": {
     "newtab": "popup.html"
