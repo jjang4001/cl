@@ -18,6 +18,8 @@ export class compiler {
         return [{title: "first command", test: "test"}, {title: "test", test: "test2"}];
       case "ls":
         return this._tabsService.getAllTabs();
+      case "init":
+        return this._tabsService.getAllTabs();
       default:
         return [{title: "could not recognize the command"}];
     }

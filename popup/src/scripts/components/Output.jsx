@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import Ls from './Ls';
+
 class Output extends Component {
   constructor(props) {
     super(props);
@@ -7,15 +9,16 @@ class Output extends Component {
 
   render() {
   	const output = this.props.commandOutput;
-    return (
-      <div id="output">
-      	<ul>
-          {output.map(function(tab) {
-          	return <li>{tab.title}</li>;
-          })}
-      	</ul>
-      </div>
-    );
+    const commandType = this.props.commandType;
+    if (commandType == "ls") {
+      return (
+        <div id="output">
+          <Ls lsOutput={output}/>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
