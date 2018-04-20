@@ -1,5 +1,5 @@
 # cl
-This is the start of a sipmle command line tool for chrome. To run the code, first clone the repo. Then, from the command line run
+To run, first clone the repo. Then, from the command line run
 ```
 npm install
 ```
